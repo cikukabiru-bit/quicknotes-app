@@ -40,6 +40,35 @@ function deleteNote(id) {
   render();
 }
 
+// Edit the text of one note by its id
+function editNote(id) {
+  const note = notes.find(function (item) {
+    return item.id === id;
+  });
+
+  const newText = prompt("Edit your note:", note.text);
+
+  // The user clicked Cancel
+  if (newText === null) {
+    return;
+  }
+
+  if (newText.trim() === "") {
+    errorMessage.textContent = "Please type a note first.";
+    return;
+  }
+
+  if (newText.trim().length > 200) {
+    errorMessage.textContent = "Notes must be 200 characters or fewer.";
+    return;
+  }
+
+  errorMessage.textContent = "";
+  note.text = newText.trim();
+  saveNotes();
+  render();
+}
+
 // Rebuild the list from the notes array
 function render() {
   notesList.textContent = "";
@@ -74,6 +103,13 @@ function render() {
     date.classList.add("note-date");
     date.textContent = note.createdAt;
 
+        const editBtn = document.createElement("button");
+    editBtn.classList.add("edit-btn");
+    editBtn.textContent = "Edit";
+    editBtn.addEventListener("click", function () {
+      editNote(note.id);
+    });
+
     const deleteBtn = document.createElement("button");
     deleteBtn.classList.add("delete-btn");
     deleteBtn.textContent = "Delete";
@@ -85,6 +121,7 @@ function render() {
     li.appendChild(label);
     li.appendChild(date);
     li.appendChild(deleteBtn);
+    li.appendChild(editBtn);
     notesList.appendChild(li);
   }
 
