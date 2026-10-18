@@ -7,8 +7,18 @@ const searchInput = document.querySelector("#search-input");
 const noteCount = document.querySelector("#note-count");
 const notesList = document.querySelector("#notes-list");
 
-// The notes array
+// The notes array (loaded from localStorage if there are saved notes)
 let notes = [];
+
+const savedNotes = localStorage.getItem("notes");
+if (savedNotes !== null) {
+  notes = JSON.parse(savedNotes);
+}
+
+// Save the notes array to localStorage
+function saveNotes() {
+  localStorage.setItem("notes", JSON.stringify(notes));
+}
 
 // Update the note count message
 function updateCount() {
@@ -26,6 +36,7 @@ function deleteNote(id) {
   notes = notes.filter(function (note) {
     return note.id !== id;
   });
+  saveNotes();
   render();
 }
 
@@ -33,7 +44,20 @@ function deleteNote(id) {
 function render() {
   notesList.textContent = "";
 
-  for (const note of notes) {
+  const searchText = searchInput.value.trim().toLowerCase();
+
+  const visibleNotes = notes.filter(function (note) {
+    return note.text.toLowerCase().includes(searchText);
+  });
+
+  if (searchText !== "" && visibleNotes.length === 0) {
+    const message = document.createElement("li");
+    message.classList.add("empty-message");
+    message.textContent = "No notes match your search.";
+    notesList.appendChild(message);
+  }
+
+  for (const note of visibleNotes) {
     const li = document.createElement("li");
     li.classList.add("note");
     li.classList.add("category-" + note.category);
@@ -93,8 +117,14 @@ noteForm.addEventListener("submit", function (event) {
   };
 
   notes.push(note);
+  saveNotes();
   render();
   noteInput.value = "";
+});
+
+// Search as the user types
+searchInput.addEventListener("input", function () {
+  render();
 });
 
 // Show the notes when the page first loads
