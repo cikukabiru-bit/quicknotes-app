@@ -1,0 +1,178 @@
+/* Reset */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  color: #222222;
+}
+
+/* Header */
+header {
+  background-color: #264653;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+
+header h1 {
+  margin: 0;
+}
+
+header p {
+  margin: 5px 0 0;
+}
+
+/* Main column */
+main {
+  max-width: 700px;
+  margin: 20px auto;
+  padding: 0 15px;
+}
+
+/* Section cards */
+section {
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+section h2 {
+  margin-top: 0;
+}
+
+/* Form with Flexbox */
+form {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#note-input {
+  flex: 1;
+}
+
+input,
+select {
+  padding: 8px;
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+  font-size: 15px;
+}
+
+#search-input {
+  width: 100%;
+  margin: 8px 0;
+}
+
+/* Buttons */
+button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 5px;
+  background-color: #2a9d8f;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #1f7a6f;
+}
+
+/* Error message */
+#error-message {
+  color: red;
+}
+
+/* Notes list */
+#notes-list {
+  list-style: none;
+  padding: 0;
+}
+
+.note {
+  padding: 12px;
+  border: 1px solid #dddddd;
+  border-left: 6px solid #999999;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.note-text {
+  margin: 0 0 8px;
+}
+
+.note-category {
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  color: white;
+  margin-right: 8px;
+}
+
+.note-date {
+  font-size: 12px;
+  color: #666666;
+  margin-right: 8px;
+}
+
+.delete-btn {
+  background-color: #555555;
+  font-size: 12px;
+  padding: 4px 10px;
+}
+
+.delete-btn:hover {
+  background-color: #8b0000;
+}
+
+/* Category styles */
+.category-personal {
+  border-left-color: teal;
+}
+
+.category-personal .note-category {
+  background-color: teal;
+}
+
+.category-work {
+  border-left-color: darkred;
+}
+
+.category-work .note-category {
+  background-color: darkred;
+}
+
+.category-study {
+  border-left-color: #1d4ed8;
+}
+
+.category-study .note-category {
+  background-color: #1d4ed8;
+}
+
+/* Message when search finds nothing */
+.empty-message {
+  color: #666666;
+  font-style: italic;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 15px;
+  color: #666666;
+  font-size: 10px;
+}
+
+/* Small screens: stack the form */
+@media (max-width: 600px) {
+  form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
