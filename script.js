@@ -6,6 +6,7 @@ const errorMessage = document.querySelector("#error-message");
 const searchInput = document.querySelector("#search-input");
 const noteCount = document.querySelector("#note-count");
 const notesList = document.querySelector("#notes-list");
+const clearAllBtn = document.querySelector("#clear-all-btn");
 
 // The notes array (loaded from localStorage if there are saved notes)
 let notes = [];
@@ -162,6 +163,15 @@ noteForm.addEventListener("submit", function (event) {
 // Search as the user types
 searchInput.addEventListener("input", function () {
   render();
+});
+
+// Delete every note after the user confirms
+clearAllBtn.addEventListener("click", function () {
+  if (confirm("Delete all notes?")) {
+    notes = [];
+    saveNotes();
+    render();
+  }
 });
 
 // Show the notes when the page first loads
